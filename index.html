@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<head>
+    <title>M P SREEKAANTH</title>
+    <link rel="icon" type="image/png" href="images.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio of M P SREEKAANTH – BSc Electronics Graduate, Front-End Developer & Photography ethutiast." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet" />
+
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mobile-responsive-fix.css">
+</head>
+
+<body class="no-scroll">
+
+    <!-- ==================== CYBERPUNK INTRO ==================== -->
+
+
+    <!-- ========== ANIMATED BACKGROUND ========== -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="wrapper">
+
+        <!-- ==================== NAV ==================== -->
+     <nav>
+    <a href="#" class="nav-logo">SREEK</a>
+
+    <!-- HAMBURGER -->
+    <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- NAV LINKS -->
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+        <!-- ==================== HERO ==================== -->
+        <section id="hero">
+            <div class="hero-content-wrapper">
+                <div class="hero-text-content">
+                    <div class="hero-name-wrap" data-text="M P SREEKAANTH">
+                        <h1 class="hero-name">M P <span>SREEKAANTH</span></h1>
+                    </div>
+
+                    <div class="hero-roles">
+                        <span id="typed-text"></span><span class="cursor"></span>
+                    </div>
+
+                    <div class="hero-cta">
+                        <a href="work.html" class="btn btn-primary">Explore My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+
+                <div class="hero-avatar-wrap reveal">
+                    <img src="sreek.png" alt="M P Sreekaanth" class="profile-simple parallax-img fade-on-scroll" />
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT ==================== -->
+        <section id="about">
+            <div class="section-container">
+
+                <div class="section-header reveal">
+                    <span class="section-number"></span>
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="about-grid">
+
+
+                    <!-- Bio -->
+                    <div class="about-text reveal">
+                        <h3>BSc Electronics Graduate &amp; Creative Developer</h3>
+                        <p>
+                            Hey! I'm <strong style="color:var(--neon-cyan)">M P Sreekaanth</strong> — a BSc Electronics
+                            graduate with a passion for crafting beautiful digital experiences and capturing the world
+                            through a lens.
+                        </p>
+                        <p>
+                            I blend analytical thinking from my electronics background with creative flair to build
+                            stunning front-end interfaces and tell compelling visual stories through photography.
+                        </p>
+                        <div class="about-stats">
+                            <div class="stat-card">
+                                <div class="stat-num">BSc</div>
+                                <div class="stat-label">Electronics</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-num">Pursuing Masters in </div>
+                                <div class="stat-label">Software Application Development at CUSAT</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-num">Loves to take</div>
+                                <div class="stat-label">Nature Photography</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SKILLS ==================== -->
+        <section id="skills">
+            <div class="section-container">
+
+                <div class="section-header reveal">
+                    <span class="section-number"></span>
+                    <h2 class="section-title">Skills</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="skills-hud-grid">
+
+                    <!-- Panel 1: Front-End -->
+                    <div class="skill-panel reveal">
+                        <div class="panel-header">
+                            <span class="panel-icon">⚡</span>
+                            <h3 class="panel-title">Front-End Dev</h3>
+                            <div class="panel-line"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="skill-card" data-percent="90">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-cyan)" />
+                                </svg>
+                                <span class="ring-pct">90%</span>
+                                <h4 class="skill-name">HTML5</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="80">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42"
+                                        style="stroke:var(--neon-purple)" />
+                                </svg>
+                                <span class="ring-pct">80%</span>
+                                <h4 class="skill-name">CSS3</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="75">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-gold)" />
+                                </svg>
+                                <span class="ring-pct">75%</span>
+                                <h4 class="skill-name">JavaScript</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="88">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-pink)" />
+                                </svg>
+                                <span class="ring-pct">88%</span>
+                                <h4 class="skill-name">Responsive</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Photography -->
+                    <div class="skill-panel reveal">
+                        <div class="panel-header">
+                            <span class="panel-icon">📷</span>
+                            <h3 class="panel-title">Photography</h3>
+                            <div class="panel-line"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="skill-card" data-percent="92">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-pink)" />
+                                </svg>
+                                <span class="ring-pct">92%</span>
+                                <h4 class="skill-name">Composition</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="88">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-cyan)" />
+                                </svg>
+                                <span class="ring-pct">88%</span>
+                                <h4 class="skill-name">Lighting</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="85">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-gold)" />
+                                </svg>
+                                <span class="ring-pct">85%</span>
+                                <h4 class="skill-name">Editing</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="90">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42"
+                                        style="stroke:var(--neon-purple)" />
+                                </svg>
+                                <span class="ring-pct">90%</span>
+                                <h4 class="skill-name">Storytelling</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Technical -->
+                    <div class="skill-panel reveal">
+                        <div class="panel-header">
+                            <span class="panel-icon">🔬</span>
+                            <h3 class="panel-title">Technical</h3>
+                            <div class="panel-line"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="skill-card" data-percent="80">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42"
+                                        style="stroke:var(--neon-purple)" />
+                                </svg>
+                                <span class="ring-pct">80%</span>
+                                <h4 class="skill-name">Circuits</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="78">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-cyan)" />
+                                </svg>
+                                <span class="ring-pct">78%</span>
+                                <h4 class="skill-name">UI / UX</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: Soft Skills -->
+                    <div class="skill-panel reveal">
+                        <div class="panel-header">
+                            <span class="panel-icon">💻</span>
+                            <h3 class="panel-title">Soft Skills</h3>
+                            <div class="panel-line"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="skill-card" data-percent="85">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-cyan)" />
+                                </svg>
+                                <span class="ring-pct">85%</span>
+                                <h4 class="skill-name">Communication</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="85">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-gold)" />
+                                </svg>
+                                <span class="ring-pct">85%</span>
+                                <h4 class="skill-name">Problem Solving</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="90">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-pink)" />
+                                </svg>
+                                <span class="ring-pct">90%</span>
+                                <h4 class="skill-name">Creativity</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONTACT ==================== -->
+        <section id="contact">
+            <div class="section-container">
+
+                <div class="section-header reveal">
+                    <span class="section-number"></span>
+                    <h2 class="section-title">Contact</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="contact-content">
+
+                    <!-- Info -->
+                    <div class="contact-info reveal">
+                        <h3>Let's Connect</h3>
+                        <p>
+                            Whether you have a project idea, a creative collaboration, or just want to say
+                            hello — my inbox is always open. Drop a message and I'll get back to you!
+                        </p>
+                        <div class="contact-links">
+                            <a href="mailto:mpsreekaanth@gmail.com" class="contact-link-item">
+                                <span class="link-icon"><i class="fa-solid fa-envelope"></i></span>
+                                mpsreekaanth@gmail.com
+                            </a>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/m-p-sreekaanth" class="social-icon"
+                                aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/mpsreekaanth-code" class="social-icon" aria-label="GitHub"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@Sreekstudios" class="social-icon" aria-label="YouTube"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <a href="https://www.instagram.com/__.sreek.__?igsh=MTFsbW83enZtd3VmZw=="
+                                class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form class="contact-form reveal" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="// Your Name" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="// Your Email" required />
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" placeholder="// Your Message..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message →</button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FOOTER ==================== -->
+        <footer>
+            <p>
+                <strong style="color:var(--neon-cyan);font-family:var(--font-main);letter-spacing:2px">
+                </strong>
+            </p>
+            <p style="margin-top:0.4rem">© 2026 M P Sreekaanth — All rights reserved</p>
+        </footer>
+
+    </div><!-- /.wrapper -->
+
+    <!-- JavaScript -->
+    <script src="script.js">
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("navLinks");
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", function () {
+      navLinks.classList.toggle("active");
+      hamburger.classList.toggle("active");
+    });
+  }
+});
+</script>
+
+</body>
+
+</html>
