@@ -24,9 +24,6 @@
 
 <body class="no-scroll">
 
-    <!-- ==================== CYBERPUNK INTRO ==================== -->
-
-
     <!-- ========== ANIMATED BACKGROUND ========== -->
     <canvas id="bg-canvas"></canvas>
     <div class="grid-overlay"></div>
@@ -71,10 +68,11 @@
                     </div>
                 </div>
 
-                <div class="hero-avatar-wrap reveal">
-                    <img src="sreek.png" alt="M P Sreekaanth" class="profile-simple parallax-img fade-on-scroll" />
-                </div>
-            </div>
+              <div class="profile-3d-card">
+    <div class="card-inner">
+        <img src="sreek.png" alt="Profile Photo">
+    </div>
+</div>
             <div class="scroll-indicator">
                 <span>Scroll</span>
                 <div class="scroll-line"></div>
@@ -180,6 +178,34 @@
                         </div>
                     </div>
 
+                    <!-- Panel 3: Technical -->
+                    <div class="skill-panel reveal">
+                        <div class="panel-header">
+                            <span class="panel-icon">🔬</span>
+                            <h3 class="panel-title">Technical</h3>
+                            <div class="panel-line"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="skill-card" data-percent="80">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42"
+                                        style="stroke:var(--neon-purple)" />
+                                </svg>
+                                <span class="ring-pct">80%</span>
+                                <h4 class="skill-name">Circuits</h4>
+                            </div>
+
+                            <div class="skill-card" data-percent="78">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-cyan)" />
+                                </svg>
+                                <span class="ring-pct">78%</span>
+                                <h4 class="skill-name">UI / UX</h4>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Panel 2: Photography -->
                     <div class="skill-panel reveal">
                         <div class="panel-header">
@@ -227,35 +253,6 @@
                         </div>
                     </div>
 
-                    <!-- Panel 3: Technical -->
-                    <div class="skill-panel reveal">
-                        <div class="panel-header">
-                            <span class="panel-icon">🔬</span>
-                            <h3 class="panel-title">Technical</h3>
-                            <div class="panel-line"></div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="skill-card" data-percent="80">
-                                <svg class="ring-svg" viewBox="0 0 100 100">
-                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
-                                    <circle class="ring-fill" cx="50" cy="50" r="42"
-                                        style="stroke:var(--neon-purple)" />
-                                </svg>
-                                <span class="ring-pct">80%</span>
-                                <h4 class="skill-name">Circuits</h4>
-                            </div>
-
-                            <div class="skill-card" data-percent="78">
-                                <svg class="ring-svg" viewBox="0 0 100 100">
-                                    <circle class="ring-bg" cx="50" cy="50" r="42" />
-                                    <circle class="ring-fill" cx="50" cy="50" r="42" style="stroke:var(--neon-cyan)" />
-                                </svg>
-                                <span class="ring-pct">78%</span>
-                                <h4 class="skill-name">UI / UX</h4>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Panel 4: Soft Skills -->
                     <div class="skill-panel reveal">
                         <div class="panel-header">
@@ -297,44 +294,50 @@
             </div>
         </section>
 
-     <div class="interests-grid">
+    <section class="interests-section">
 
-    <div class="interest-card">
-        <i class="fa-solid fa-baseball-bat-ball"></i>
-        <span>Cricket</span>
+    <h2 class="interests-title">Personal Interests</h2>
+
+    <div class="interests-grid">
+
+        <div class="interest-card">
+            <i class="fa-solid fa-baseball-bat-ball"></i>
+            <span>Cricket</span>
+        </div>
+
+        <div class="interest-card">
+            <i class="fa-solid fa-futbol"></i>
+            <span>Football</span>
+        </div>
+
+        <div class="interest-card">
+            <i class="fa-solid fa-camera"></i>
+            <span>Photography</span>
+        </div>
+
+        <div class="interest-card">
+            <i class="fa-solid fa-mountain-sun"></i>
+            <span>Nature Exploring</span>
+        </div>
+
+        <div class="interest-card">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Web Design</span>
+        </div>
+
+        <div class="interest-card">
+            <i class="fa-solid fa-music"></i>
+            <span>Music</span>
+        </div>
+
+        <div class="interest-card">
+            <i class="fa-solid fa-plane"></i>
+            <span>Travelling</span>
+        </div>
+
     </div>
 
-    <div class="interest-card">
-        <i class="fa-solid fa-futbol"></i>
-        <span>Football</span>
-    </div>
-
-    <div class="interest-card">
-        <i class="fa-solid fa-camera"></i>
-        <span>Photography</span>
-    </div>
-
-    <div class="interest-card">
-        <i class="fa-solid fa-mountain-sun"></i>
-        <span>Nature Exploring</span>
-    </div>
-
-    <div class="interest-card">
-        <i class="fa-solid fa-laptop-code"></i>
-        <span>Web Design</span>
-    </div>
-
-    <div class="interest-card">
-        <i class="fa-solid fa-music"></i>
-        <span>Music</span>
-    </div>
-
-    <div class="interest-card">
-        <i class="fa-solid fa-plane"></i>
-        <span>Travelling</span>
-    </div>
-
-</div>
+</section>
 
         <!-- ==================== CONTACT ==================== -->
         <section id="contact">
@@ -425,6 +428,23 @@ document.addEventListener("DOMContentLoaded", function () {
       hamburger.classList.toggle("active");
     });
   }
+});
+</script>
+<script>
+const card = document.querySelector(".profile-3d-card");
+const inner = document.querySelector(".card-inner");
+
+card.addEventListener("mousemove", (e) => {
+
+    let x = (window.innerWidth / 2 - e.pageX) / 20;
+    let y = (window.innerHeight / 2 - e.pageY) / 20;
+
+    inner.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+
+});
+
+card.addEventListener("mouseleave", () => {
+    inner.style.transform = "rotateY(0deg) rotateX(0deg)";
 });
 </script>
 

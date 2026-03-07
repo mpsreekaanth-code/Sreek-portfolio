@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Payment</title>
+</head>
+
+<body>
+
+<h1>Pay for your order</h1>
+
+<button id="payBtn">Pay Now</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+document.getElementById("payBtn").onclick=function(){
+
+var options = {
+
+key: "YOUR_RAZORPAY_KEY",
+
+amount: 5000,
+
+currency: "INR",
+
+name: "Bisleri Store",
+
+description: "Water Order",
+
+handler: function (response){
+
+alert("Payment Successful")
+
+}
+
+};
+
+var rzp = new Razorpay(options);
+
+rzp.open();
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Bisleri Premium Mineral Water - Pure hydration perfected through science and nature.">
+
+    <title>Bisleri Premium Water</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+
+</head>
+
+<body>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <canvas id="waterBg"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+
+        <h2 class="logo">Bisleri</h2>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul id="navMenu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li onclick="toggleDark()" title="Toggle Dark Mode">🌙</li>
+            <li onclick="toggleCart()" title="View Cart">🛒 <span id="cartCount" class="cart-count">0</span></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-text">
+
+            <p class="hero-tag">Premium Hydration Since 1965</p>
+
+            <h1 class="water-text" data-text="Pure Mineral Water">Pure Mineral Water</h1>
+
+            <p class="subtitle">Hydration perfected through science and nature. Every drop sourced from pristine
+                mountain springs.</p>
+
+            <div class="hero-btns">
+                <button class="btn"
+                    onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+                <button class="btn btn-outline"
+                    onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+            </div>
+
+        </div>
+
+        <div id="scene3d"></div>
+
+    </section>
+
+
+    <!-- STATS BAR -->
+    <section class="stats-bar reveal">
+        <div class="stat">
+            <h3 class="counter" data-target="10">0</h3>
+            <p>Million Bottles/Day</p>
+        </div>
+        <div class="stat">
+            <h3 class="counter" data-target="500">0</h3>
+            <p>Cities Covered</p>
+        </div>
+        <div class="stat">
+            <h3 class="counter" data-target="60">0</h3>
+            <p>Years of Trust</p>
+        </div>
+        <div class="stat">
+            <h3 class="counter" data-target="100">0</h3>
+            <p>% Pure Water</p>
+        </div>
+    </section>
+
+
+    <!-- ABOUT / STORY -->
+    <section class="story reveal" id="about">
+
+        <h2>From Mountains to Bottle</h2>
+
+        <p>
+            Every drop passes through a 10-step advanced purification process,
+            ensuring the safest and most refreshing hydration you can trust.
+            Sourced from underground aquifers and natural springs.
+        </p>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <section class="products" id="products">
+
+        <h2 class="reveal">Our Products</h2>
+
+        <div class="product-grid">
+
+            <div class="card reveal">
+                <div class="card-icon">💧</div>
+                <h3>500ml Bottle</h3>
+                <p class="price">₹10</p>
+                <p class="card-desc">Perfect for on-the-go hydration</p>
+                <button onclick="addToCart('500ml Bottle', 10)">Add to Cart</button>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-icon">💧</div>
+                <h3>1L Bottle</h3>
+                <p class="price">₹20</p>
+                <p class="card-desc">Ideal for daily use</p>
+                <button onclick="addToCart('1L Bottle', 20)">Add to Cart</button>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-icon">💧</div>
+                <h3>2L Bottle</h3>
+                <p class="price">₹35</p>
+                <p class="card-desc">Family-friendly size</p>
+                <button onclick="addToCart('2L Bottle', 35)">Add to Cart</button>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-icon">🪣</div>
+                <h3>5L Can</h3>
+                <p class="price">₹55</p>
+                <p class="card-desc">Great for gatherings</p>
+                <button onclick="addToCart('5L Can', 55)">Add to Cart</button>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-icon">🛢️</div>
+                <h3>20L Can</h3>
+                <p class="price">₹90</p>
+                <p class="card-desc">Office & home supply</p>
+                <button onclick="addToCart('20L Can', 90)">Add to Cart</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <h2 class="reveal">Why Choose Bisleri?</h2>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">🔬</div>
+                <h3>10-Step Purification</h3>
+                <p>Advanced filtration removes 99.9% of impurities while retaining essential minerals.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">⚗️</div>
+                <h3>Balanced Minerals</h3>
+                <p>Calcium and magnesium maintain the perfect taste and health benefits.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🌿</div>
+                <h3>Eco-Friendly Packaging</h3>
+                <p>100% recyclable bottles made with reduced plastic usage for a greener planet.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">✅</div>
+                <h3>ISO Certified</h3>
+                <p>International quality standards certified at every production facility.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="reveal">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card reveal">
+                <p class="testimonial-text">"The purest water I've ever tasted. Bisleri never compromises on quality."
+                </p>
+                <div class="testimonial-author">
+                    <strong>Arjun Mehta</strong>
+                    <span>Fitness Trainer, Mumbai</span>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <p class="testimonial-text">"We've been using Bisleri for our office for years. Consistent quality every
+                    time."</p>
+                <div class="testimonial-author">
+                    <strong>Priya Sharma</strong>
+                    <span>Office Manager, Delhi</span>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <p class="testimonial-text">"My family trusts only Bisleri. The mineral balance is perfect for daily
+                    use."</p>
+                <div class="testimonial-author">
+                    <strong>Rajesh Kumar</strong>
+                    <span>Father of Two, Bangalore</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <h2 class="reveal">Get in Touch</h2>
+        <div class="contact-content reveal">
+            <form id="contactForm" onsubmit="handleContact(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <div class="info-item">
+                    <span>📧</span>
+                    <p>support@bisleri.com</p>
+                </div>
+                <div class="info-item">
+                    <span>📞</span>
+                    <p>+91 1800 123 4567</p>
+                </div>
+                <div class="info-item">
+                    <span>📍</span>
+                    <p>Mumbai, Maharashtra, India</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CART SIDEBAR -->
+    <div id="cart" class="cart">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <span class="cart-close" onclick="toggleCart()">✕</span>
+        </div>
+        <ul id="cartItems"></ul>
+        <div class="cart-total">
+            <strong>Total: ₹<span id="cartTotal">0</span></strong>
+        </div>
+        <button class="btn cart-checkout" onclick="alert('Proceeding to checkout!')">Checkout</button>
+    </div>
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        title="Back to top">↑</button>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3 class="logo">Bisleri</h3>
+                <p>Premium mineral water since 1965. Purity you can trust.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Bisleri Premium — All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -148,8 +148,10 @@ animate();
 const roles = [
   'BSc Electronics Graduate',
   'Front-End Developer',
-  'Photography Enthusiast',
+  'Aspiring Entrepreneur',
   'UI / UX Enthusiast',
+  'Photography Enthusiast',
+  
 ];
 let roleIndex = 0;
 let charIndex = 0;
