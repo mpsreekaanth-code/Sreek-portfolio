@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Attendance - Modern attendance tracking system for offices, colleges, and schools with real-time analytics and beautiful interface.">
+    <title>Smart Attendance | Modern Attendance Tracking System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-icon">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <h1 class="splash-title">Smart Attendance</h1>
+            <p class="splash-subtitle">Intelligent Tracking System</p>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <span class="brand-text">Smart<span class="brand-highlight">Attend</span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                    <i class="fas fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="#mark" class="nav-link" data-section="mark">
+                    <i class="fas fa-clipboard-check"></i> Mark Attendance
+                </a>
+                <a href="#records" class="nav-link" data-section="records">
+                    <i class="fas fa-database"></i> Records
+                </a>
+                <a href="#analytics" class="nav-link" data-section="analytics">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </a>
+                <a href="#settings" class="nav-link" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </div>
+            <div class="nav-actions">
+                <div class="mode-toggle" id="modeToggle" title="Toggle Mode">
+                    <i class="fas fa-building"></i>
+                    <span class="mode-label">Office</span>
+                </div>
+                <div class="nav-profile" id="navProfile">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="profile-name">Admin</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mode Selector Floating Panel -->
+        <div class="mode-selector-panel" id="modeSelectorPanel">
+            <h3>Select Mode</h3>
+            <div class="mode-options">
+                <div class="mode-option active" data-mode="office">
+                    <div class="mode-icon"><i class="fas fa-building"></i></div>
+                    <span>Office</span>
+                </div>
+                <div class="mode-option" data-mode="college">
+                    <div class="mode-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <span>College</span>
+                </div>
+                <div class="mode-option" data-mode="school">
+                    <div class="mode-icon"><i class="fas fa-school"></i></div>
+                    <span>School</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== DASHBOARD SECTION ===================== -->
+        <section id="dashboard" class="section active">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1 class="section-title">
+                        <span class="title-icon"><i class="fas fa-chart-pie"></i></span>
+                        Dashboard
+                    </h1>
+                    <p class="section-subtitle">Real-time attendance overview</p>
+                </div>
+                <div class="header-date">
+                    <div class="live-clock" id="liveClock">
+                        <i class="fas fa-clock"></i>
+                        <span id="clockTime">00:00:00</span>
+                    </div>
+                    <div class="current-date" id="currentDate"></div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card card-present" data-animate="fade-up" data-delay="0">
+                    <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="totalPresent">0</h3>
+                        <p class="stat-label">Present Today</p>
+                    </div>
+                    <div class="stat-ring">
+                        <svg viewBox="0 0 36 36">
+                            <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="ring-fill present-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-card card-absent" data-animate="fade-up" data-delay="100">
+                    <div class="stat-icon"><i class="fas fa-user-times"></i></div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="totalAbsent">0</h3>
+                        <p class="stat-label">Absent Today</p>
+                    </div>
+                    <div class="stat-ring">
+                        <svg viewBox="0 0 36 36">
+                            <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="ring-fill absent-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-card card-late" data-animate="fade-up" data-delay="200">
+                    <div class="stat-icon"><i class="fas fa-user-clock"></i></div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="totalLate">0</h3>
+                        <p class="stat-label">Late Arrivals</p>
+                    </div>
+                    <div class="stat-ring">
+                        <svg viewBox="0 0 36 36">
+                            <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="ring-fill late-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-card card-total" data-animate="fade-up" data-delay="300">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" id="totalMembers">0</h3>
+                        <p class="stat-label">Total Members</p>
+                    </div>
+                    <div class="stat-ring">
+                        <svg viewBox="0 0 36 36">
+                            <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <path class="ring-fill total-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-card" data-animate="fade-up" data-delay="400">
+                    <h3 class="chart-title"><i class="fas fa-chart-bar"></i> Weekly Overview</h3>
+                    <div class="bar-chart" id="weeklyChart">
+                        <div class="bar-group" data-day="Mon">
+                            <div class="bar-wrapper">
+                                <div class="bar bar-present" style="height: 0%"></div>
+                                <div class="bar bar-absent" style="height: 0%"></div>
+                            </div>
+                            <span class="bar-label">Mon</span>
+                        </div>
+                        <div class="bar-group" data-day="Tue">
+                            <div class="bar-wrapper">
+                                <div class="bar bar-present" style="height: 0%"></div>
+                                <div class="bar bar-absent" style="height: 0%"></div>
+                            </div>
+                            <span class="bar-label">Tue</span>
+                        </div>
+                        <div class="bar-group" data-day="Wed">
+                            <div class="bar-wrapper">
+                                <div class="bar bar-present" style="height: 0%"></div>
+                                <div class="bar bar-absent" style="height: 0%"></div>
+                            </div>
+                            <span class="bar-label">Wed</span>
+                        </div>
+                        <div class="bar-group" data-day="Thu">
+                            <div class="bar-wrapper">
+                                <div class="bar bar-present" style="height: 0%"></div>
+                                <div class="bar bar-absent" style="height: 0%"></div>
+                            </div>
+                            <span class="bar-label">Thu</span>
+                        </div>
+                        <div class="bar-group" data-day="Fri">
+                            <div class="bar-wrapper">
+                                <div class="bar bar-present" style="height: 0%"></div>
+                                <div class="bar bar-absent" style="height: 0%"></div>
+                            </div>
+                            <span class="bar-label">Fri</span>
+                        </div>
+                        <div class="bar-group" data-day="Sat">
+                            <div class="bar-wrapper">
+                                <div class="bar bar-present" style="height: 0%"></div>
+                                <div class="bar bar-absent" style="height: 0%"></div>
+                            </div>
+                            <span class="bar-label">Sat</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <span class="legend-item"><span class="legend-dot present-dot"></span> Present</span>
+                        <span class="legend-item"><span class="legend-dot absent-dot"></span> Absent</span>
+                    </div>
+                </div>
+                <div class="chart-card" data-animate="fade-up" data-delay="500">
+                    <h3 class="chart-title"><i class="fas fa-list-alt"></i> Recent Activity</h3>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="activity-empty">
+                            <i class="fas fa-inbox"></i>
+                            <p>No recent activity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== MARK ATTENDANCE SECTION ===================== -->
+        <section id="mark" class="section">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1 class="section-title">
+                        <span class="title-icon"><i class="fas fa-clipboard-check"></i></span>
+                        Mark Attendance
+                    </h1>
+                    <p class="section-subtitle">Record attendance quickly and efficiently</p>
+                </div>
+            </div>
+
+            <!-- Add Member Form -->
+            <div class="form-card" data-animate="fade-up">
+                <h3 class="form-title"><i class="fas fa-user-plus"></i> Add New Member</h3>
+                <form id="addMemberForm" class="member-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="memberId">ID / Roll Number</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-id-badge"></i>
+                                <input type="text" id="memberId" placeholder="Enter ID" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberName">Full Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="memberName" placeholder="Enter name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberDept">Department / Class</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-layer-group"></i>
+                                <input type="text" id="memberDept" placeholder="Enter department">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="addMemberBtn">
+                        <i class="fas fa-plus-circle"></i> Add Member
+                    </button>
+                </form>
+            </div>
+
+            <!-- Attendance Table -->
+            <div class="table-card" data-animate="fade-up" data-delay="200">
+                <div class="table-header">
+                    <h3 class="form-title"><i class="fas fa-clipboard-list"></i> Today's Attendance</h3>
+                    <div class="table-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchMember" placeholder="Search member...">
+                        </div>
+                        <button class="btn btn-success" id="markAllPresent">
+                            <i class="fas fa-check-double"></i> Mark All Present
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="attendance-table" id="attendanceTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceBody">
+                            <!-- Rows dynamically injected -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-empty" id="tableEmpty">
+                    <div class="empty-illustration">
+                        <i class="fas fa-users-slash"></i>
+                    </div>
+                    <h3>No Members Yet</h3>
+                    <p>Add members above to start tracking attendance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== RECORDS SECTION ===================== -->
+        <section id="records" class="section">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1 class="section-title">
+                        <span class="title-icon"><i class="fas fa-database"></i></span>
+                        Attendance Records
+                    </h1>
+                    <p class="section-subtitle">View and export past attendance data</p>
+                </div>
+            </div>
+
+            <div class="records-filters" data-animate="fade-up">
+                <div class="filter-group">
+                    <label>Date Range</label>
+                    <div class="date-range">
+                        <input type="date" id="recordDateFrom" class="date-input">
+                        <span class="date-separator">to</span>
+                        <input type="date" id="recordDateTo" class="date-input">
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="recordStatusFilter" class="select-input">
+                        <option value="all">All Status</option>
+                        <option value="present">Present</option>
+                        <option value="absent">Absent</option>
+                        <option value="late">Late</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="filterRecords">
+                    <i class="fas fa-filter"></i> Filter
+                </button>
+                <button class="btn btn-outline" id="exportRecords">
+                    <i class="fas fa-file-export"></i> Export CSV
+                </button>
+            </div>
+
+            <div class="records-table-card" data-animate="fade-up" data-delay="200">
+                <div class="table-responsive">
+                    <table class="attendance-table" id="recordsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Check-in Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="records-empty" id="recordsEmpty">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No Records Found</h3>
+                    <p>Start marking attendance to see records here</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== ANALYTICS SECTION ===================== -->
+        <section id="analytics" class="section">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1 class="section-title">
+                        <span class="title-icon"><i class="fas fa-chart-line"></i></span>
+                        Analytics
+                    </h1>
+                    <p class="section-subtitle">Attendance insights and trends</p>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="analytics-card large" data-animate="fade-up">
+                    <h3 class="chart-title"><i class="fas fa-chart-area"></i> Attendance Trend (30 Days)</h3>
+                    <div class="trend-chart" id="trendChart">
+                        <canvas id="trendCanvas"></canvas>
+                    </div>
+                </div>
+                <div class="analytics-card" data-animate="fade-up" data-delay="100">
+                    <h3 class="chart-title"><i class="fas fa-trophy"></i> Top Attendees</h3>
+                    <div class="top-attendees" id="topAttendees">
+                        <div class="attendee-empty">
+                            <i class="fas fa-award"></i>
+                            <p>No data yet</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="analytics-card" data-animate="fade-up" data-delay="200">
+                    <h3 class="chart-title"><i class="fas fa-percentage"></i> Overall Stats</h3>
+                    <div class="overall-stats" id="overallStats">
+                        <div class="overall-stat">
+                            <div class="overall-circle">
+                                <svg viewBox="0 0 36 36">
+                                    <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="ring-fill overall-present-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100"/>
+                                </svg>
+                                <span class="overall-percent" id="overallPresentPercent">0%</span>
+                            </div>
+                            <p>Avg. Attendance Rate</p>
+                        </div>
+                        <div class="overall-stat">
+                            <div class="stat-detail">
+                                <div class="detail-row">
+                                    <span class="detail-label"><i class="fas fa-calendar-check"></i> Total Days</span>
+                                    <span class="detail-value" id="totalDaysTracked">0</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label"><i class="fas fa-user-check"></i> Total Check-ins</span>
+                                    <span class="detail-value" id="totalCheckins">0</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label"><i class="fas fa-user-times"></i> Total Absences</span>
+                                    <span class="detail-value" id="totalAbsences">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SETTINGS SECTION ===================== -->
+        <section id="settings" class="section">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1 class="section-title">
+                        <span class="title-icon"><i class="fas fa-cog"></i></span>
+                        Settings
+                    </h1>
+                    <p class="section-subtitle">Configure your attendance system</p>
+                </div>
+            </div>
+
+            <div class="settings-grid">
+                <div class="settings-card" data-animate="fade-up">
+                    <h3><i class="fas fa-palette"></i> Appearance</h3>
+                    <div class="setting-item">
+                        <label>Theme</label>
+                        <div class="theme-switcher">
+                            <button class="theme-btn active" data-theme="dark" id="themeDark">
+                                <i class="fas fa-moon"></i> Dark
+                            </button>
+                            <button class="theme-btn" data-theme="light" id="themeLight">
+                                <i class="fas fa-sun"></i> Light
+                            </button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Accent Color</label>
+                        <div class="color-palette">
+                            <button class="color-btn active" data-color="#6c5ce7" style="--btn-color: #6c5ce7"></button>
+                            <button class="color-btn" data-color="#00cec9" style="--btn-color: #00cec9"></button>
+                            <button class="color-btn" data-color="#fd79a8" style="--btn-color: #fd79a8"></button>
+                            <button class="color-btn" data-color="#ffeaa7" style="--btn-color: #ffeaa7"></button>
+                            <button class="color-btn" data-color="#55efc4" style="--btn-color: #55efc4"></button>
+                            <button class="color-btn" data-color="#74b9ff" style="--btn-color: #74b9ff"></button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Animations</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="animationToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-card" data-animate="fade-up" data-delay="100">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <div class="setting-item">
+                        <label>Late Arrival Alert</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="lateAlert" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>Daily Summary</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="dailySummary" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>Late Threshold (minutes)</label>
+                        <input type="number" class="number-input" id="lateThreshold" value="15" min="1" max="120">
+                    </div>
+                </div>
+                <div class="settings-card" data-animate="fade-up" data-delay="200">
+                    <h3><i class="fas fa-database"></i> Data Management</h3>
+                    <div class="setting-item">
+                        <button class="btn btn-outline" id="exportAllData">
+                            <i class="fas fa-download"></i> Export All Data
+                        </button>
+                    </div>
+                    <div class="setting-item">
+                        <button class="btn btn-outline" id="importData">
+                            <i class="fas fa-upload"></i> Import Data
+                        </button>
+                        <input type="file" id="importFile" accept=".json" style="display:none">
+                    </div>
+                    <div class="setting-item">
+                        <button class="btn btn-danger" id="clearAllData">
+                            <i class="fas fa-trash-alt"></i> Clear All Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toast Notifications Container -->
+        <div class="toast-container" id="toastContainer"></div>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="fabBtn" title="Quick Add">
+            <i class="fas fa-plus"></i>
+        </button>
+
+        <!-- Quick Add Modal -->
+        <div class="modal-overlay" id="quickAddModal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3><i class="fas fa-bolt"></i> Quick Attendance</h3>
+                    <button class="modal-close" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="quick-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="quickSearch" placeholder="Search by name or ID...">
+                    </div>
+                    <div class="quick-results" id="quickResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
