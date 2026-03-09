@@ -63,7 +63,7 @@ body {
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, border-color 0.3s;
+    transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s, opacity 0.3s;
 }
 
 .cursor.hovered {
@@ -258,7 +258,6 @@ body {
 
 .line span {
     display: block;
-    transform: translateY(100%);
 }
 
 .btn {
@@ -272,7 +271,7 @@ body {
     font-family: var(--font-body);
     font-weight: 500;
     letter-spacing: 2px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease;
     margin-top: 2rem;
     position: relative;
     overflow: hidden;
@@ -373,12 +372,14 @@ body {
 .marquee-track {
     display: flex;
     white-space: nowrap;
-    width: 200vw;
+    width: max-content;
 }
 
 .marquee {
     display: flex;
     white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 100%;
 }
 
 .marquee span {
@@ -418,11 +419,7 @@ body {
     font-weight: 600;
 }
 
-/* By default characters are invisible for SplitType animate-in */
-.char {
-    opacity: 0.1;
-    transition: opacity 0.3s;
-}
+
 
 /* Collection */
 .collection {
@@ -474,12 +471,12 @@ body {
     top: -10%;
     position: absolute;
     filter: brightness(0.8) contrast(1.1);
-    transition: filter 0.5s ease, transform 0.5s ease;
+    transition: filter 0.5s ease, scale 0.5s ease;
 }
 
 .product-card:hover .parallax-img {
     filter: brightness(1) contrast(1.0);
-    transform: scale(1.03);
+    scale: 1.03;
 }
 
 .product-info {
@@ -578,10 +575,10 @@ body {
 
 .massive-footer-text {
     font-family: var(--font-heading);
-    font-size: 20vw;
+    font-size: 15vw;
     line-height: 0.8;
     text-align: center;
-    letter-spacing: -5px;
+    letter-spacing: -3px;
     color: transparent;
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
     transition: color 0.5s, -webkit-text-stroke 0.5s;

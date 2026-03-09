@@ -165,12 +165,11 @@ if (marqueeTracks.length > 0) {
 
             const isReverse = marquee.classList.contains('marquee-reverse');
 
-            gsap.to(track.querySelectorAll('.marquee'), {
-                xPercent: isReverse ? 100 : -100,
-                ease: "none",
-                duration: 25,
-                repeat: -1
-            });
+            if (isReverse) {
+                gsap.fromTo(track.querySelectorAll('.marquee'), { xPercent: -100 }, { xPercent: 0, ease: "none", duration: 25, repeat: -1 });
+            } else {
+                gsap.to(track.querySelectorAll('.marquee'), { xPercent: -100, ease: "none", duration: 25, repeat: -1 });
+            }
         }
     });
 
