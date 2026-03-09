@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+
 <head>
     <title>My Works</title>
     <link rel="icon" type="image/png" href="images.jpg">
-<meta name="description" content="Projects and Works of M P Sreekaanth" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="description" content="Projects and Works of M P Sreekaanth" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Same Fonts (important for theme consistency) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@400;600;700&display=swap"
+        rel="stylesheet" />
 
     <!-- Reuse your main CSS -->
     <link rel="stylesheet" href="style.css" />
@@ -15,64 +18,221 @@
     <style>
         /* Work Page Specific Styles */
         body {
-            background: #020617;
+            background: #0d0914;
+            /* Deep violet-black for creativity theme */
             color: #e2e8f0;
-            font-family: 'Chakra Petch', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient floating orbs for creativity theme */
+        .creative-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+            background: linear-gradient(to right, #1a1625, #221c35, #0d0914);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: floatOrb 20s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 45vw;
+            height: 45vw;
+            background: #ff007f;
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 40vw;
+            height: 40vw;
+            background: #00f0ff;
+            bottom: -15%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 35vw;
+            height: 35vw;
+            background: #7c3aed;
+            top: 40%;
+            left: 40%;
+            animation-delay: -10s;
+        }
+
+        .orb-4 {
+            width: 30vw;
+            height: 30vw;
+            background: #ffcc00;
+            top: 10%;
+            right: 20%;
+            animation-delay: -15s;
+            opacity: 0.3;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(3vw, -5vh) scale(1.1) rotate(5deg);
+            }
+
+            66% {
+                transform: translate(-2vw, 4vh) scale(0.9) rotate(-5deg);
+            }
+
+            100% {
+                transform: translate(4vw, 3vh) scale(1) rotate(0deg);
+            }
         }
 
         .work-hero {
-    padding: 120px 20px 70px;
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
+            padding: 120px 20px 70px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            animation: fadeInDown 1s ease-out forwards;
+        }
 
-      .work-title {
-    font-size: 3.2rem;
-    letter-spacing: 4px;
-    background: linear-gradient(90deg, #00f0ff, #7c3aed);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 25px rgba(0,240,255,0.35);
-}
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .work-title {
+            font-size: 4.5rem;
+            letter-spacing: 6px;
+            background: linear-gradient(90deg, #ff007f, #7c3aed, #00f0ff, #ff007f);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 45px rgba(255, 0, 127, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            to {
+                background-position: 200% center;
+            }
+        }
+
         .work-subtitle {
-            margin-top: 10px;
-            color: #a1a1b5;
-            letter-spacing: 2px;
+            margin-top: 15px;
+            color: #e2e8f0;
+            letter-spacing: 4px;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .work-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px 100px;
-}
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
 
-      .work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
-    align-items: stretch; /* Makes all cards equal height */
-}
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            align-items: stretch;
+        }
 
-     .work-card {
-    background: linear-gradient(145deg, rgba(12, 12, 24, 0.75), rgba(2, 6, 23, 0.9));
-    border: 1px solid rgba(0, 240, 255, 0.12);
-    border-radius: 18px;
-    padding: 22px;
-    transition: all 0.4s ease;
-    backdrop-filter: blur(14px);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-}
-     .work-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: rgba(0, 240, 255, 0.6);
-    box-shadow: 
-        0 20px 60px rgba(0,240,255,0.15),
-        0 0 25px rgba(0,240,255,0.25);
-}
+        .work-card {
+            background: rgba(20, 15, 35, 0.45);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: cardReveal 0.8s ease-out forwards;
+            animation-fill-mode: both;
+        }
+
+        .work-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .work-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .work-card:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+            pointer-events: none;
+        }
+
+        .work-card:hover::before {
+            left: 150%;
+        }
+
+        @keyframes cardReveal {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .work-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(255, 0, 127, 0.15),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
         .work-image {
             width: 100%;
             border-radius: 10px;
@@ -85,387 +245,488 @@
             letter-spacing: 1px;
         }
 
-       .work-desc {
-    font-size: 0.95rem;
-    color: #cbd5f5;
-    margin-top: 10px;
-    line-height: 1.6;
-    text-align: justify;
-}
-       .back-btn {
-    display: inline-block;
-    margin-top: 60px;
-    padding: 14px 34px;
-    border-radius: 30px;
-    border: 1px solid #00f0ff;
-    color: #00f0ff;
-    text-decoration: none;
-    letter-spacing: 2px;
-    transition: all 0.4s ease;
-    font-weight: 600;
-}
+        .work-desc {
+            font-size: 0.95rem;
+            color: #cbd5f5;
+            margin-top: 10px;
+            line-height: 1.6;
+            text-align: justify;
+        }
 
-.back-btn:hover {
-    background: #00f0ff;
-    color: #000;
-    box-shadow: 0 0 30px rgba(0,240,255,0.7);
-    transform: translateY(-2px);
-}
+        .back-btn {
+            display: inline-block;
+            margin-top: 60px;
+            padding: 14px 34px;
+            border-radius: 30px;
+            border: 1px solid #00f0ff;
+            color: #00f0ff;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #00f0ff;
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
         /* ================= Photography Gallery ================= */
-.photo-gallery {
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
-}
+        .photo-gallery {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
 
-.photo-gallery img {
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.4s ease;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-}
+        .photo-gallery img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.5s ease;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            filter: grayscale(100%) brightness(0.85);
+        }
 
-/* Hover Zoom Effect */
-.photo-gallery img:hover {
-    transform: scale(1.08);
-    border-color: #00f0ff;
-    box-shadow: 0 0 15px rgba(0,240,255,0.4);
-}
-.work-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
+        /* Hover Zoom Effect */
+        .photo-gallery img:hover {
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(1.1);
+            border-color: #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            z-index: 10;
+            position: relative;
+        }
 
-.pdf-preview {
-    width: 100%;
-    height: 180px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #020617, #0f172a);
-    border: 1px dashed rgba(0, 240, 255, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    color: #00f0ff;
-    margin-bottom: 15px;
-    transition: 0.4s ease;
-}
+        .work-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
 
-.work-card:hover .pdf-preview {
-    background: rgba(0, 240, 255, 0.05);
-    border-color: #00f0ff;
-    box-shadow: 0 0 20px rgba(0,240,255,0.3);
-}
-/* Clickable card link (no underline) */
-.work-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
+        .pdf-preview {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #020617, #0f172a);
+            border: 1px dashed rgba(0, 240, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: #00f0ff;
+            margin-bottom: 15px;
+            transition: 0.4s ease;
+        }
 
-/* Improved project image container */
-.project-image {
-    position: relative;
-    width: 100%;
-    height: 190px;
-    border-radius: 14px;
-    overflow: hidden;
-    margin-bottom: 18px;
-    border: 1px solid rgba(0,240,255,0.15);
-}
+        .work-card:hover .pdf-preview {
+            background: rgba(0, 240, 255, 0.05);
+            border-color: #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
 
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
+        /* Clickable card link (no underline) */
+        .work-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
 
-/* Image hover zoom */
-.work-card:hover .project-image img,
-.work-card:hover .work-image {
-    transform: scale(1.08);
-}
+        /* Improved project image container */
+        .project-image {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
 
-/* PDF Badge */
-.project-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #00f0ff;
-    color: #000;
-    font-size: 0.7rem;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
 
-/* Photography Card Special Styling */
-.photo-card {
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+        /* Image hover zoom */
+        .work-card:hover .project-image img,
+        .work-card:hover .work-image {
+            transform: scale(1.08);
+        }
 
-/* Photography Gallery Grid */
-.photo-gallery {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 14px;
-}
+        /* PDF Badge */
+        .project-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #00f0ff;
+            color: #000;
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
-.photo-gallery img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: 0.4s ease;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-}
+        /* Photography Card Special Styling */
+        .photo-card {
+            grid-column: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-/* Photography Hover Effect */
-.photo-gallery img:hover {
-    transform: scale(1.08);
-    border-color: #00f0ff;
-    box-shadow: 0 0 20px rgba(0,240,255,0.4);
-}
+        /* Photography Gallery Grid */
+        .photo-gallery {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+        }
 
-/* Smooth card hover */
-.work-card {
-    transition: all 0.4s ease;
-}
+        .photo-gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 0.4s ease;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
 
-.work-card:hover {
-    transform: translateY(-8px) scale(1.01);
-}
-.project-tags {
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
+        /* Photography Hover Effect */
+        .photo-gallery img:hover {
+            transform: scale(1.08);
+            border-color: #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
 
-.project-tags span {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 20px;
-    background: rgba(0, 240, 255, 0.08);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    color: #00f0ff;
-    letter-spacing: 0.5px;
-    transition: 0.3s ease;
-}
+        /* Smooth card hover */
+        .work-card {
+            transition: all 0.4s ease;
+        }
 
-.project-tags span:hover {
-    background: #00f0ff;
-    color: #000;
-}
-.project-cta {
-    margin-top: 15px;
-    padding: 10px 14px;
-    border: 1px solid rgba(0,240,255,0.3);
-    border-radius: 8px;
-    color: #00f0ff;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-align: center;
-    background: rgba(0,240,255,0.03);
-    transition: 0.3s ease;
-}
+        .work-card:hover {
+            transform: translateY(-8px) scale(1.01);
+        }
 
-.work-card:hover .project-cta {
-    background: rgba(0,240,255,0.1);
-    border-color: #00f0ff;
-    box-shadow: 0 0 15px rgba(0,240,255,0.3);
-    transform: translateY(-2px);
-}
-/* =========================================================
+        .project-tags {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-tags span {
+            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 4px;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00f0ff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 240, 255, 0);
+        }
+
+        .project-tags span:hover {
+            background: linear-gradient(90deg, #ff007f, #7c3aed);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .project-cta {
+            margin-top: 15px;
+            padding: 10px 14px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 8px;
+            color: #00f0ff;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-align: center;
+            background: rgba(0, 240, 255, 0.03);
+            transition: 0.3s ease;
+        }
+
+        .work-card:hover .project-cta {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
    MOBILE RESPONSIVE FIX (WORK PAGE)
 ========================================================= */
 
-/* Tablets */
-@media (max-width: 900px) {
-    .work-title {
-        font-size: 2.4rem;
-        letter-spacing: 2px;
-    }
+        /* Tablets */
+        @media (max-width: 900px) {
+            .work-title {
+                font-size: 2.4rem;
+                letter-spacing: 2px;
+            }
 
-    .work-hero {
-        padding: 100px 20px 50px;
-    }
+            .work-hero {
+                padding: 100px 20px 50px;
+            }
 
-    .work-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
-    }
+            .work-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 25px;
+            }
 
-    .photo-card {
-        grid-column: span 1; /* FIX: prevents layout breaking */
-    }
-}
+            .photo-card {
+                grid-column: span 1;
+                /* FIX: prevents layout breaking */
+            }
+        }
 
-/* Mobile Phones */
-@media (max-width: 768px) {
+        /* Mobile Phones */
+        @media (max-width: 768px) {
 
-    body {
-        overflow-x: hidden;
-    }
+            body {
+                overflow-x: hidden;
+            }
 
-    .work-hero {
-        padding: 90px 15px 40px;
-        text-align: center;
-    }
+            .work-hero {
+                padding: 90px 15px 40px;
+                text-align: center;
+            }
 
-    .work-title {
-        font-size: 2rem;
-        letter-spacing: 2px;
-    }
+            .work-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
 
-    .work-subtitle {
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-    }
+            .work-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
 
-    .work-container {
-        padding: 30px 15px 70px;
-    }
+            .work-container {
+                padding: 30px 15px 70px;
+            }
 
-    /* MAIN GRID FIX */
-    .work-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 22px;
-    }
+            /* MAIN GRID FIX */
+            .work-grid {
+                grid-template-columns: 1fr;
+                /* Single column on mobile */
+                gap: 22px;
+            }
 
-    .work-card {
-        padding: 18px;
-        border-radius: 14px;
-    }
+            .work-card {
+                padding: 18px;
+                border-radius: 14px;
+            }
 
-    .work-name {
-        font-size: 1.15rem;
-    }
+            .work-name {
+                font-size: 1.15rem;
+            }
 
-    .work-desc {
-        font-size: 0.9rem;
-        text-align: left; /* better readability on mobile */
-    }
+            .work-desc {
+                font-size: 0.9rem;
+                text-align: left;
+                /* better readability on mobile */
+            }
 
-    /* IMAGE HEIGHT FIX */
-    .project-image {
-        height: 170px;
-    }
+            /* IMAGE HEIGHT FIX */
+            .project-image {
+                height: 170px;
+            }
 
-    .work-image {
-        height: auto;
-    }
+            .work-image {
+                height: auto;
+            }
 
-    /* PHOTO CARD FIX */
-  .photo-card {
-    grid-column: span 2;
-}
+            /* PHOTO CARD FIX */
+            .photo-card {
+                grid-column: span 2;
+            }
 
-@media (max-width: 900px) {
-    .photo-card {
-        grid-column: span 1;
-    }
-}
+            @media (max-width: 900px) {
+                .photo-card {
+                    grid-column: span 1;
+                }
+            }
 
-    /* PHOTO GALLERY MOBILE */
-    .photo-gallery {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
+            /* PHOTO GALLERY MOBILE */
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
 
-    .photo-gallery img {
-        height: 100px;
-        border-radius: 8px;
-    }
+            .photo-gallery img {
+                height: 100px;
+                border-radius: 8px;
+            }
 
-    /* TAGS */
-    .project-tags {
-        gap: 6px;
-    }
+            /* TAGS */
+            .project-tags {
+                gap: 6px;
+            }
 
-    .project-tags span {
-        font-size: 0.7rem;
-        padding: 5px 10px;
-    }
+            .project-tags span {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+            }
 
-    /* CTA BUTTON */
-    .project-cta {
-        font-size: 0.75rem;
-        padding: 9px 12px;
-    }
+            /* CTA BUTTON */
+            .project-cta {
+                font-size: 0.75rem;
+                padding: 9px 12px;
+            }
 
-    /* BACK BUTTON */
-    .back-btn {
-        margin-top: 40px;
-        padding: 12px 24px;
-        font-size: 0.85rem;
-    }
-}
+            /* BACK BUTTON */
+            .back-btn {
+                margin-top: 40px;
+                padding: 12px 24px;
+                font-size: 0.85rem;
+            }
+        }
 
-/* Small Phones (iPhone SE, small Android) */
-@media (max-width: 480px) {
+        /* Small Phones (iPhone SE, small Android) */
+        @media (max-width: 480px) {
 
-    .work-title {
-        font-size: 1.7rem;
-    }
+            .work-title {
+                font-size: 1.7rem;
+            }
 
-    .work-hero {
-        padding: 80px 12px 30px;
-    }
+            .work-hero {
+                padding: 80px 12px 30px;
+            }
 
-    .work-card {
-        padding: 16px;
-    }
+            .work-card {
+                padding: 16px;
+            }
 
-    .project-image {
-        height: 150px;
-    }
+            .project-image {
+                height: 150px;
+            }
 
-    .photo-gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-    .photo-gallery img {
-        height: 90px;
-    }
-}
-.view-btn{
-    margin-top:10px;
-    padding:8px 14px;
-    background:#00f7ff;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:600;
-}
+            .photo-gallery img {
+                height: 90px;
+            }
+        }
 
-.works-list{
-    display:none;
-    margin-top:10px;
-}
+        /* Image specific adjustments for the Web Dev block */
+        .work-image-wrapper {
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
 
-.work-item{
-    display:block;
-    padding:6px;
-    color:#00f7ff;
-    text-decoration:none;
-}
+        .work-image-wrapper img {
+            width: 100%;
+            transition: 0.5s ease;
+            border-radius: 12px;
+        }
+
+        .work-card:hover .work-image-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .work-content h3 {
+            color: #00f0ff;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .work-content p {
+            color: #cbd5f5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .web-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 10px 0;
+        }
+
+        .web-proj-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .web-proj-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .web-proj-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 240, 255, 0.05));
+            border-color: #00f0ff;
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3);
+        }
+
+        .web-proj-card:hover::before {
+            opacity: 1;
+        }
+
+        .proj-icon {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .web-proj-card h4 {
+            font-size: 1.2rem;
+            color: #ff007f;
+            margin: 0;
+            font-family: 'Chakra Petch', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .web-proj-card p {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            margin: 0;
+            line-height: 1.3;
+        }
     </style>
 </head>
 
 <body>
+    <div class="creative-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
 
     <!-- Hero Section -->
     <section class="work-hero">
@@ -475,129 +736,124 @@
 
     <!-- Work Grid -->
     <div class="work-container">
-    <div class="work-grid">
+        <div class="work-grid">
 
-        <!-- ===== Project 1 : Portfolio Website ===== -->
- <div class="work-card">
+            <!-- WORK CARD -->
+            <div class="work-card" style="grid-column: 1 / -1;"> <!-- Make Web Dev span full width for tab area -->
 
-    <img src="images.png" class="work-image" alt="Portfolio Website">
+                <div class="work-image-wrapper" style="height: 300px;">
+                    <img src="images.png" alt="Web Development Projects" style="object-position: center 30%;">
+                </div>
 
-<h3 class="work-name">Web Development Projects</h3>
+                <div class="work-content">
+                    <h3 style="font-size: 2rem; color: #fff;">Web Development</h3>
 
-<p class="work-desc">
-A collection of websites I designed and developed for different purposes,
-including personal projects and practical web applications. These works
-demonstrate my skills in HTML, CSS, and JavaScript, focusing on responsive
-design, modern UI layouts, and interactive user experiences.
-</p>
-</p>
+                    <p style="font-size: 1.1rem; max-width: 800px;">
+                       Collection of websites built using HTML, CSS and JavaScript, focusing on responsive design, modern UI, and interactive features.
 
-    <!-- View Works Button -->
-    <button class="view-btn" onclick="toggleWorks()">View Works</button>
+Click to explore my demo websites. If you like my work, feel free to contact me for collaborations or future projects.
 
-    <!-- Hidden Works List -->
-    <div id="works-list" class="works-list">
+                    </p>
 
-    <a href="e-commerce/" class="work-item" target="_blank">
-    E-Commerce Website
-</a>
+                    <div class="web-projects-grid" style="margin-top: 20px;">
+                        <a href="e-commerce/" target="_blank" class="web-proj-card">
+                            <span class="proj-icon">🛒</span>
+                            <h4>E-Commerce</h4>
+                            <p>Modern online store with shopping functions</p>
+                        </a>
+                        <a href="attendance/" target="_blank" class="web-proj-card">
+                            <span class="proj-icon">📋</span>
+                            <h4>Attendance Portal</h4>
+                            <p>Student/Employee attendance tracker module</p>
+                        </a>
+                        <a href="fashion-store/" target="_blank" class="web-proj-card">
+                            <span class="proj-icon">✨</span>
+                            <h4>Fashion Store</h4>
+                            <p>High-end clothing brand aesthetic website</p>
+                        </a>
+                    </div>
+                </div>
 
-        <a href="attendance/" class="work-item" target="_blank">
-            Attendance Portal
-        </a>
-
-        <a href="projects/notes-app.html" class="work-item">
-            Notes App
-        </a>
-
-    </div>
-
-</div>
-
-        <!-- ===== Project 2 : Electronics Project ===== -->
-       <a href="anti-sleeping-project.html" class="work-card-link">
-    <div class="work-card">
-        <div class="project-image">
-            <img src="anti sleeping.jpg" alt="Anti-Sleeping Driving System">
-            <span class="project-badge">Project</span>
-        </div>
-
-        <h3 class="work-name">Anti-Sleeping Driving System</h3>
-
-        <p class="work-desc">
-            Arduino-based Anti-Sleeping Driving System (Embedded C++)
-            designed to detect driver drowsiness and prevent accidents
-            using real-time alert mechanisms and LCD display.
-        </p>
-
-       <div class="project-tags">
-    <span>Arduino</span>
-    <span>Embedded C++</span>
-    <span>Electronics</span>
-    <span>Safety System</span>
-</div>
-
-<div class="project-cta">
-    <span>Click here to see full project details →</span>
-</div>
-    </div>
-</a>
-
-        <!-- ===== Photography Section (Now Proper Card) ===== -->
-        <div class="work-card photo-card">
-            <h3 class="work-name">Photography</h3>
-            <p class="work-desc">
-                Nature and creative photography capturing moments, composition,
-                and visual storytelling.
-            </p>
-
-            <div class="photo-gallery">
-                <a href="nature.jpeg" target="_blank">
-                    <img src="nature.jpeg" alt="Nature Photography">
-                </a>
-                <a href="lilly.jpeg" target="_blank">
-                    <img src="lilly.jpeg" alt="Lilly Photography">
-                </a>
-                <a href="mother.jpeg" target="_blank">
-                    <img src="mother.jpeg" alt="Portrait Photography">
-                </a>
-                <a href="buildings.jpeg" target="_blank">
-                    <img src="buildings.jpeg" alt="Buildings Photography">
-                </a>
-                 <a href="church.jpeg" target="_blank">
-                    <img src="church.jpeg" alt="Church Photography">
-                </a>
-                 <a href="lillykutty.jpeg" target="_blank">
-                    <img src="lillykutty.jpeg" alt="Lillykutty Photography">
-                </a>
-                 <a href="beauty.jpeg" target="_blank">
-                    <img src="beauty.jpeg" alt="beauty Photography">
-                </a>
-                 <a href="puppy.jpeg" target="_blank">
-                    <img src="puppy.jpeg" alt="puppy Photography">
-                </a>
             </div>
-        </div>
 
+            <!-- ===== Project 2 : Electronics Project ===== -->
+            <a href="anti-sleeping-project.html" class="work-card-link">
+                <div class="work-card">
+                    <div class="project-image">
+                        <img src="anti sleeping.jpg" alt="Anti-Sleeping Driving System">
+                        <span class="project-badge">Project</span>
+                    </div>
+
+                    <h3 class="work-name">Anti-Sleeping Driving System</h3>
+
+                    <p class="work-desc">
+                        Arduino-based Anti-Sleeping Driving System (Embedded C++)
+                        designed to detect driver drowsiness and prevent accidents
+                        using real-time alert mechanisms and LCD display.
+                    </p>
+
+                    <div class="project-tags">
+                        <span>Arduino</span>
+                        <span>Embedded C++</span>
+                        <span>Electronics</span>
+                        <span>Safety System</span>
+                    </div>
+
+                    <div class="project-cta">
+                        <span>Click here to see full project details →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ===== Photography Section (Now Proper Card) ===== -->
+            <div class="work-card photo-card">
+                <h3 class="work-name">Photography</h3>
+                <p class="work-desc">
+                    Nature and creative photography capturing moments, composition,
+                    and visual storytelling.
+                </p>
+
+                <div class="photo-gallery">
+                    <a href="nature.jpeg" target="_blank">
+                        <img src="nature.jpeg" alt="Nature Photography">
+                    </a>
+                    <a href="lilly.jpeg" target="_blank">
+                        <img src="lilly.jpeg" alt="Lilly Photography">
+                    </a>
+                    <a href="mother.jpeg" target="_blank">
+                        <img src="mother.jpeg" alt="Portrait Photography">
+                    </a>
+                    <a href="buildings.jpeg" target="_blank">
+                        <img src="buildings.jpeg" alt="Buildings Photography">
+                    </a>
+                    <a href="church.jpeg" target="_blank">
+                        <img src="church.jpeg" alt="Church Photography">
+                    </a>
+                    <a href="lillykutty.jpeg" target="_blank">
+                        <img src="lillykutty.jpeg" alt="Lillykutty Photography">
+                    </a>
+                    <a href="beauty.jpeg" target="_blank">
+                        <img src="beauty.jpeg" alt="beauty Photography">
+                    </a>
+                    <a href="puppy.jpeg" target="_blank">
+                        <img src="puppy.jpeg" alt="puppy Photography">
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
 
-        <!-- Back to Home -->
-        <div style="text-align:center;">
-            <a href="index.html" class="back-btn">← Back to Home</a>
-        </div>
+    <!-- Back to Home -->
+    <div style="text-align:center;">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
     </div>
 
     <script>
-function toggleWorks(){
-    const works = document.getElementById("works-list");
-
-    if(works.style.display === "block"){
-        works.style.display = "none";
-    } else {
-        works.style.display = "block";
-    }
-}
-</script>
+        // Optional scroll reveal feature can plug in here if needed
+        // but simple CSS animations already cover the initial load!
+    </script>
 </body>
+
 </html>
