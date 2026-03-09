@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SREEK | High Fashion Studio</title>
+    <!-- SEO meta tags -->
+    <meta name="description"
+        content="Discover SREEK, a premium high-fashion studio redefining modern aesthetics with a curated collection of clothing and avant-garde designs.">
+    <meta name="keywords" content="high fashion, avant-garde, modern clothing, streetwear, luxury">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for High Fashion Look: Syne and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Syne:wght@400;600;800&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <h1 class="loader-text">Loading Fashion...</h1>
+        <div id="loader-perc" class="loader-perc">0%</div>
+        <div class="loader-progress-loader"></div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Background Glow Orbs -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <!-- Noise Layer -->
+    <div class="noise"></div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-follower" class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav">
+        <div class="nav-brand">SREEK.</div>
+        <div class="nav-links">
+            <a href="#collection" data-hover data-magnetic>Collection</a>
+            <a href="#about" data-hover data-magnetic>About</a>
+            <a href="#contact" data-hover data-magnetic>Contact</a>
+        </div>
+    </nav>
+
+    <div class="smooth-scroll-wrapper" id="scroll-wrapper">
+
+        <!-- Hero Section -->
+        <header class="hero" id="home">
+            <div class="hero-image-container">
+                <img src="assets/fashion_hero_1773040796455.png" alt="High Fashion Model in striking pose"
+                    class="hero-image" id="hero-img">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title reveal-text">
+                    <span class="line"><span>AVANT</span></span>
+                    <span class="line"><span>GARDE.</span></span>
+                </h1>
+                <p class="hero-subtitle reveal-text"><span class="line"><span>Redefining modern aesthetics through
+                            brutalist elegance.</span></span></p>
+                <a href="#collection" class="btn mix-blend" data-hover data-magnetic
+                    aria-label="Explore the collection">Explore</a>
+            </div>
+        </header>
+
+        <!-- Marquee / Ticker -->
+        <section class="marquee-wrapper" aria-hidden="true">
+            <div class="marquee-track">
+                <div class="marquee">
+                    <span>NEW COLLECTION 2026 — EXCLUSIVE DROPS — MODERN LUXURY — </span>
+                    <span>NEW COLLECTION 2026 — EXCLUSIVE DROPS — MODERN LUXURY — </span>
+                    <span>NEW COLLECTION 2026 — EXCLUSIVE DROPS — MODERN LUXURY — </span>
+                    <span>NEW COLLECTION 2026 — EXCLUSIVE DROPS — MODERN LUXURY — </span>
+                </div>
+            </div>
+            <div class="marquee-track marquee-track-reverse">
+                <div class="marquee marquee-reverse">
+                    <span>AVANT-GARDE — BRUTALIST ELEGANCE — DARK ACADEMIA — </span>
+                    <span>AVANT-GARDE — BRUTALIST ELEGANCE — DARK ACADEMIA — </span>
+                    <span>AVANT-GARDE — BRUTALIST ELEGANCE — DARK ACADEMIA — </span>
+                    <span>AVANT-GARDE — BRUTALIST ELEGANCE — DARK ACADEMIA — </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="about-container">
+                <h2 class="about-text split-text">
+                    We manifest style that defies expectations. A fusion of dark academia and modern minimalism. We are
+                    the architects of your next statement.
+                </h2>
+            </div>
+        </section>
+
+        <!-- Product Showcase -->
+        <section class="collection" id="collection">
+            <div class="collection-header">
+                <h2>CURATED <br> PIECES.</h2>
+            </div>
+            <div class="product-grid">
+                <article class="product-card" data-hover>
+                    <div class="img-wrap">
+                        <img id="product-img-1" src="assets/fashion_product_1_1773040823821.png" alt="Noir Trench Coat"
+                            class="parallax-img">
+                    </div>
+                    <div class="product-info">
+                        <h3>NOIR TRENCH</h3>
+                        <p>$850</p>
+                    </div>
+                </article>
+                <article class="product-card" data-hover>
+                    <div class="img-wrap" style="transform: translateY(100px);">
+                        <img id="product-img-2" src="assets/fashion_product_2_1773040980868.png"
+                            alt="Eclipse Boots Design" class="parallax-img">
+                    </div>
+                    <div class="product-info" style="transform: translateY(100px);">
+                        <h3>ECLIPSE BOOTS</h3>
+                        <p>$1,200</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" id="contact">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h4>STAY CONNECTED</h4>
+                    <p>Subscribe to the archive.</p>
+                    <form class="subscribe-form" aria-label="Newsletter Subscribe">
+                        <input type="email" placeholder="EMAIL" data-hover required aria-label="Email address">
+                        <button type="submit" class="btn" data-hover>JOIN</button>
+                    </form>
+                </div>
+                <div class="footer-col">
+                    <h4>SOCIALS</h4>
+                    <ul>
+                        <li><a href="#" data-hover aria-label="Instagram">Instagram</a></li>
+                        <li><a href="#" data-hover aria-label="Twitter">Twitter</a></li>
+                        <li><a href="#" data-hover aria-label="Pinterest">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <h1 class="medium-footer-text">SREEK</h1>
+                <div class="footer-legal">
+                    <p>&copy; 2026 SREEKAANTH DESIGN</p>
+                    <p>MADE WITH PASSION</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+    <!-- SplitType for Text Animation -->
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
