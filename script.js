@@ -5,12 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const introContainer = document.getElementById('cyber-intro');
   const introName = document.querySelector('.intro-name');
 
-  // Wait a short moment, then animate the text fill
   setTimeout(() => {
     if (introName) introName.classList.add('fill-text');
   }, 500);
 
-  // After the text fills, slide the intro away
   setTimeout(() => {
     if (introContainer) introContainer.classList.add('intro-complete');
     document.body.classList.remove('no-scroll');
@@ -18,29 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ============================================================
-   PARTICLE BACKGROUND — Animated starfield + glowing orbs
+   PARTICLE BACKGROUND — Optimized Starfield & Energy Orbs
 ============================================================ */
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
-let W, H, particles = [], floaters = [], mouseX = 0, mouseY = 0;
+let W, H, particles = [], floaters = [], mouseX = -1000, mouseY = -1000;
+let animationFrameId = null;
 
 function resize() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
+  initParticles();
 }
 
-window.addEventListener('resize', resize);
-resize();
-
-/* ---- Star Particle ---- */
+/* Star Particle */
 class Particle {
   constructor() { this.reset(); }
 
   reset() {
     this.x = Math.random() * W;
     this.y = Math.random() * H;
-    this.size = Math.random() * 1.5 + 0.3;
+    this.size = Math.random() * 1.4 + 0.3;
     this.speed = Math.random() * 0.25 + 0.05;
     this.opacity = Math.random() * 0.7 + 0.2;
     this.twinkle = Math.random() * Math.PI * 2;
@@ -66,16 +63,16 @@ class Particle {
   }
 }
 
-/* ---- Floating Energy Orb ---- */
+/* Floating Energy Orb */
 class Floater {
   constructor() { this.reset(); }
 
   reset() {
     this.x = Math.random() * W;
     this.y = Math.random() * H;
-    this.r = Math.random() * 80 + 40;
-    this.vx = (Math.random() - 0.5) * 0.4;
-    this.vy = (Math.random() - 0.5) * 0.4;
+    this.r = Math.random() * 60 + 30;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
     this.hue = Math.random() > 0.5 ? 185 : 280;
   }
 
@@ -97,29 +94,48 @@ class Floater {
   }
 }
 
-/* ---- Spawn ---- */
-for (let i = 0; i < 200; i++) particles.push(new Particle());
-for (let i = 0; i < 6; i++) floaters.push(new Floater());
+function initParticles() {
+  particles = [];
+  floaters = [];
+  // Responsive particle density (lag-free calculation)
+  const count = Math.min(80, Math.floor(W / 18));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+  for (let i = 0; i < 4; i++) floaters.push(new Floater());
+}
 
-/* ---- Mouse interaction ---- */
-document.addEventListener('mousemove', e => {
+window.addEventListener('resize', resize, { passive: true });
+resize();
+
+/* Throttled mouse position tracking */
+window.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
-});
+}, { passive: true });
 
-/* ---- Connection lines near cursor ---- */
+/* Fast connections near cursor (Zero-sqrt optimized) */
 function drawConnections() {
-  const nearby = particles.filter(p => {
-    const dx = p.x - mouseX, dy = p.y - mouseY;
-    return Math.sqrt(dx * dx + dy * dy) < 120;
-  });
+  if (mouseX < 0 || mouseY < 0) return;
 
+  const nearby = [];
+  const maxMouseDistSq = 14400; // 120^2
+
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    const dx = p.x - mouseX;
+    const dy = p.y - mouseY;
+    if (dx * dx + dy * dy < maxMouseDistSq) {
+      nearby.push(p);
+    }
+  }
+
+  const maxConnDistSq = 6400; // 80^2
   for (let i = 0; i < nearby.length; i++) {
     for (let j = i + 1; j < nearby.length; j++) {
       const dx = nearby[i].x - nearby[j].x;
       const dy = nearby[i].y - nearby[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 80) {
+      const distSq = dx * dx + dy * dy;
+      if (distSq < maxConnDistSq) {
+        const dist = Math.sqrt(distSq);
         ctx.beginPath();
         ctx.moveTo(nearby[i].x, nearby[i].y);
         ctx.lineTo(nearby[j].x, nearby[j].y);
@@ -131,14 +147,29 @@ function drawConnections() {
   }
 }
 
-/* ---- Main animation loop ---- */
+/* Main animation loop */
 function animate() {
   ctx.clearRect(0, 0, W, H);
-  floaters.forEach(f => { f.update(); f.draw(); });
-  particles.forEach(p => { p.update(); p.draw(); });
+  for (let i = 0; i < floaters.length; i++) {
+    floaters[i].update();
+    floaters[i].draw();
+  }
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+  }
   drawConnections();
-  requestAnimationFrame(animate);
+  animationFrameId = requestAnimationFrame(animate);
 }
+
+// Pause animation loop when tab is hidden to save battery & CPU
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+  } else {
+    animate();
+  }
+});
 animate();
 
 
@@ -147,11 +178,8 @@ animate();
 ============================================================ */
 const roles = [
   'BSc Electronics Graduate',
-  'Front-End Developer',
-  'Aspiring Entrepreneur',
-  'UI / UX Enthusiast',
-  'Photography Enthusiast',
-  
+  'Software Application Developer',
+  'Photography Enthusiast'
 ];
 let roleIndex = 0;
 let charIndex = 0;
@@ -160,6 +188,7 @@ let deleting = false;
 const typedEl = document.getElementById('typed-text');
 
 function typeWriter() {
+  if (!typedEl) return;
   const current = roles[roleIndex];
 
   if (!deleting) {
@@ -184,7 +213,7 @@ setTimeout(typeWriter, 2000);
 
 
 /* ============================================================
-   SCROLL REVEAL + SKILL BAR ANIMATION
+   SCROLL REVEAL OBSERVER
 ============================================================ */
 const revealEls = document.querySelectorAll('.reveal');
 
@@ -192,15 +221,6 @@ const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-
-      /* Animate skill ring fills when their HUD panel scrolls into view */
-      entry.target.querySelectorAll('.skill-card[data-percent]').forEach(item => {
-        const pct = parseInt(item.dataset.percent, 10);
-        const circumference = 2 * Math.PI * 42; // r=42
-        const offset = circumference - (pct / 100) * circumference;
-        const ring = item.querySelector('.ring-fill');
-        if (ring) ring.style.strokeDashoffset = offset;
-      });
     }
   });
 }, { threshold: 0.15 });
@@ -213,23 +233,27 @@ revealEls.forEach(el => revealObserver.observe(el));
 ============================================================ */
 const contactForm = document.getElementById('contact-form');
 
-contactForm.addEventListener('submit', function (e) {
-  e.preventDefault();
+if (contactForm) {
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  const btn = this.querySelector('.btn-submit');
-  btn.textContent = '✓ Message Sent!';
-  btn.style.color = '#00ff88';
-  btn.style.borderColor = '#00ff88';
-  btn.style.boxShadow = '0 0 20px rgba(0,255,136,0.4)';
+    const btn = this.querySelector('.btn-submit');
+    if (btn) {
+      btn.textContent = '✓ Message Sent!';
+      btn.style.color = '#00ff88';
+      btn.style.borderColor = '#00ff88';
+      btn.style.boxShadow = '0 0 20px rgba(0,255,136,0.4)';
 
-  setTimeout(() => {
-    btn.textContent = 'Send Message →';
-    btn.style.color = '';
-    btn.style.borderColor = '';
-    btn.style.boxShadow = '';
-    this.reset();
-  }, 3000);
-});
+      setTimeout(() => {
+        btn.textContent = 'Send Message →';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+        btn.style.boxShadow = '';
+        this.reset();
+      }, 3000);
+    }
+  });
+}
 
 /* ============================================================
    MOBILE MENU TOGGLE
@@ -243,7 +267,6 @@ if (mobileMenu && navLinks) {
     navLinks.classList.toggle('active');
   });
 
-  // Close menu when a link is clicked
   const navItems = navLinks.querySelectorAll('li a');
   navItems.forEach(item => {
     item.addEventListener('click', () => {
@@ -254,21 +277,7 @@ if (mobileMenu && navLinks) {
 }
 
 /* ============================================================
-   AI FACE RECOGNITION TEXT UPGRADE
-============================================================ */
-const aiLabel = document.querySelector('.ai-label');
-
-if (aiLabel) {
-  setTimeout(() => {
-    aiLabel.textContent = 'IDENTITY DETECTED: M P SREEKAANTH';
-  }, 4000);
-
-  setTimeout(() => {
-    aiLabel.textContent = 'STATUS: FRONT-END DEVELOPER';
-  }, 8000);
-}
-/* ============================================================
-   AI FACE SCAN CIRCLE LOADER (0% → 100%)
+   AI FACE SCAN & IDENTITY STATUS
 ============================================================ */
 const scanCircle = document.querySelector('.scan-progress');
 const scanPercentText = document.getElementById('scan-percent');
@@ -284,13 +293,12 @@ if (scanCircle && scanPercentText) {
   scanCircle.style.strokeDashoffset = circumference;
 
   const scanInterval = setInterval(() => {
-    progress += 1;
+    progress += 2; // Smoother & faster step
 
     const offset = circumference - (progress / 100) * circumference;
     scanCircle.style.strokeDashoffset = offset;
     scanPercentText.textContent = progress + '%';
 
-    // Update AI text during scan
     if (aiLabelText) {
       if (progress < 30) {
         aiLabelText.textContent = 'SCANNING FACE...';
@@ -303,291 +311,69 @@ if (scanCircle && scanPercentText) {
 
     if (progress >= 100) {
       clearInterval(scanInterval);
-
-      // Final AI message
       if (aiLabelText) {
         aiLabelText.textContent = 'IDENTITY CONFIRMED: M P SREEKAANTH';
       }
-
-      // Fade out loader ring smoothly
       setTimeout(() => {
         if (scanLoader) {
           scanLoader.classList.add('completed');
         }
-      }, 800);
+      }, 500);
     }
-  }, 30); // Speed of scan (lower = faster)
-}
-/* ============================================================
-   3D PARALLAX ANIMATION FOR PROFILE IMAGE
-============================================================ */
-const profileImg = document.querySelector('.animated-profile-img');
-
-document.addEventListener('mousemove', (e) => {
-  if (!profileImg) return;
-
-  const x = (window.innerWidth / 2 - e.clientX) / 50;
-  const y = (window.innerHeight / 2 - e.clientY) / 50;
-
-  profileImg.style.transform = `translateY(-10px) rotateY(${x}deg) rotateX(${y}deg) scale(1.03)`;
-});
-
-document.addEventListener('mouseleave', () => {
-  if (!profileImg) return;
-  profileImg.style.transform = 'translateY(0px) scale(1)';
-});
-/* ============================================================
-   3D PARALLAX EFFECT FOR PROFILE IMAGE (WOW INTERACTION)
-============================================================ */
-const profile = document.querySelector('.profile-animated');
-
-document.addEventListener('mousemove', (e) => {
-  if (!profile) return;
-
-  const x = (window.innerWidth / 2 - e.clientX) / 40;
-  const y = (window.innerHeight / 2 - e.clientY) / 40;
-
-  profile.style.transform = `
-    translateY(-10px)
-    rotateY(${x}deg)
-    rotateX(${y}deg)
-    scale(1.03)
-  `;
-});
-
-document.addEventListener('mouseleave', () => {
-  if (!profile) return;
-  profile.style.transform = 'translateY(0px) scale(1)';
-});
-/* ============================================================
-   CINEMATIC PROFILE REVEAL (SYNC WITH CYBER INTRO)
-============================================================ */
-window.addEventListener("load", () => {
-  const profile = document.querySelector('.profile-blend');
-
-  // Wait until intro animation finishes
-  setTimeout(() => {
-    if (profile) {
-      profile.classList.add('revealed');
-    }
-  }, 2600); // matches your intro timing (2.5s)
-});
-/* ============================================================
-   3D CINEMATIC DEPTH + AI SPOTLIGHT FOLLOW (HERO IMAGE)
-============================================================ */
-
-const avatarWrap = document.querySelector('.hero-avatar-wrap');
-const profileImage = document.querySelector('.profile-blend');
-
-if (avatarWrap && profileImage) {
-
-  avatarWrap.addEventListener('mousemove', (e) => {
-    const rect = avatarWrap.getBoundingClientRect();
-
-    // Mouse position inside avatar area
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Calculate rotation for 3D depth
-    const rotateX = ((y - centerY) / centerY) * 8;
-    const rotateY = ((centerX - x) / centerX) * 10;
-
-    // Apply cinematic 3D transform
-    profileImage.style.transform = `
-      translateY(-10px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      scale(1.03)
-    `;
-
-    // Move spotlight glow with cursor
-    avatarWrap.style.setProperty(
-      '--spot-x',
-      `${x - rect.width / 2}px`
-    );
-    avatarWrap.style.setProperty(
-      '--spot-y',
-      `${y - rect.height / 2}px`
-    );
-
-    avatarWrap.style.transform = 'translateZ(0)';
-  });
-
-  // Reset when mouse leaves (smooth return)
-  avatarWrap.addEventListener('mouseleave', () => {
-    profileImage.style.transform = `
-      translateY(0px)
-      rotateX(0deg)
-      rotateY(0deg)
-      scale(1)
-    `;
-  });
-}
-/* ============================================================
-   SIMPLE PROFILE REVEAL (LIGHTWEIGHT & SMOOTH)
-============================================================ */
-window.addEventListener("load", () => {
-  const profile = document.querySelector('.profile-simple');
-
-  // Sync with your intro (2.5s)
-  setTimeout(() => {
-    if (profile) {
-      profile.classList.add('show');
-    }
-  }, 2600);
-});
-/* ============================================================
-   STYLISH PARALLAX EFFECT FOR PROFILE IMAGE (SMOOTH & MINIMAL)
-============================================================ */
-const parallaxImg = document.querySelector('.parallax-img');
-const avatarContainer = document.querySelector('.hero-avatar-wrap');
-
-if (parallaxImg && avatarContainer) {
-  avatarContainer.addEventListener('mousemove', (e) => {
-    const rect = avatarContainer.getBoundingClientRect();
-
-    // Mouse position inside container
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Convert to -1 to 1 range
-    const moveX = (x / rect.width - 0.5) * 20;  // horizontal depth
-    const moveY = (y / rect.height - 0.5) * 15; // vertical depth
-
-    // Apply smooth parallax transform
-    parallaxImg.style.transform = `
-      translateY(-10px)
-      translateX(${moveX}px)
-      translateY(${moveY - 10}px)
-      scale(1.02)
-    `;
-  });
-
-  // Reset when mouse leaves (smooth return)
-  avatarContainer.addEventListener('mouseleave', () => {
-    parallaxImg.style.transform = `
-      translateY(0px)
-      translateX(0px)
-      scale(1)
-    `;
-  });
+  }, 25);
 }
 
-
 /* ============================================================
-   ERROR-FREE PARALLAX SYSTEM (MOUSE + SCROLL) – CLEAN & STABLE
+   UNIFIED HIGH-PERFORMANCE 3D HERO PARALLAX (LAG-FREE)
 ============================================================ */
-
-// Wait until DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+  const heroAvatar = document.querySelector('.hero-avatar-wrap');
+  const heroImg = document.querySelector('.parallax-img') || document.querySelector('.profile-blend');
 
-  const profileImg = document.querySelector('.parallax-img');
-  const avatarWrap = document.querySelector('.hero-avatar-wrap');
+  if (!heroAvatar || !heroImg) return;
 
-  // Safety check (prevents console errors)
-  if (!profileImg || !avatarWrap) return;
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+  let ticking = false;
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let scrollYValue = 0;
-  let currentX = 0;
-  let currentY = 0;
+  heroAvatar.addEventListener('mousemove', (e) => {
+    const rect = heroAvatar.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-  /* ----------------------------------------
-     Smooth reveal after your intro animation
-  ---------------------------------------- */
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      profileImg.classList.add("show");
-    }, 2600); // matches your intro timing
-  });
+    targetX = x * 12;
+    targetY = y * 10;
 
-  /* ----------------------------------------
-     Mouse Parallax (Desktop Only)
-  ---------------------------------------- */
-  avatarWrap.addEventListener('mousemove', (e) => {
-    const rect = avatarWrap.getBoundingClientRect();
-
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Convert to range -0.5 to 0.5 (very smooth)
-    mouseX = (x / rect.width - 0.5);
-    mouseY = (y / rect.height - 0.5);
-  });
-
-  avatarWrap.addEventListener('mouseleave', () => {
-    mouseX = 0;
-    mouseY = 0;
-  });
-
-  /* ----------------------------------------
-     Scroll Parallax (Light & Smooth)
-  ---------------------------------------- */
-  window.addEventListener('scroll', () => {
-    scrollYValue = window.scrollY || window.pageYOffset;
+    if (!ticking) {
+      requestAnimationFrame(updateHeroTransform);
+      ticking = true;
+    }
   }, { passive: true });
 
-  /* ----------------------------------------
-     Smooth Animation Loop (No Jitter)
-  ---------------------------------------- */
-  function animateParallax() {
+  heroAvatar.addEventListener('mouseleave', () => {
+    targetX = 0;
+    targetY = 0;
+    if (!ticking) {
+      requestAnimationFrame(updateHeroTransform);
+      ticking = true;
+    }
+  }, { passive: true });
 
-    // Target movement values (very subtle & premium)
-    const targetX = mouseX * 15;      // horizontal depth
-    const targetY = mouseY * 12;      // vertical depth
-    const scrollOffset = scrollYValue * 0.03; // soft scroll effect
+  function updateHeroTransform() {
+    currentX += (targetX - currentX) * 0.1;
+    currentY += (targetY - currentY) * 0.1;
 
-    // Lerp smoothing (prevents shaking)
-    currentX += (targetX - currentX) * 0.08;
-    currentY += (targetY - currentY) * 0.08;
+    heroImg.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0) scale(1.02)`;
 
-    // Apply transform safely (no multiline template issues)
-    profileImg.style.transform =
-      `translate3d(${currentX}px, ${currentY - scrollOffset}px, 0) scale(1.02)`;
-
-    requestAnimationFrame(animateParallax);
-  }
-
-  // Start animation loop
-  animateParallax();
-});
-/* ============================================================
-   SCROLL FADE BLEND EFFECT (SMOOTH & LIGHTWEIGHT)
-============================================================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-  const profile = document.querySelector('.fade-on-scroll');
-
-  if (!profile) return;
-
-  function handleScrollFade() {
-    const scrollY = window.scrollY || window.pageYOffset;
-
-    // Adjust fade start & strength here
-    const fadeStart = 80;
-    const fadeEnd = 700;
-
-    if (scrollY <= fadeStart) {
-      profile.style.opacity = "1";
-      profile.style.filter = "blur(0px) brightness(1)";
+    if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+      requestAnimationFrame(updateHeroTransform);
     } else {
-      // Calculate smooth fade progress (0 to 1)
-      const progress = Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
-
-      // Apply cinematic fade + blend
-      const opacityValue = 1 - progress * 0.6; // fades to 0.4
-      const blurValue = progress * 1.5;        // slight blur
-      const brightnessValue = 1 - progress * 0.15;
-
-      profile.style.opacity = opacityValue;
-      profile.style.filter = `blur(${blurValue}px) brightness(${brightnessValue})`;
+      ticking = false;
     }
   }
 
-  // Smooth scroll listener (performance optimized)
-  window.addEventListener('scroll', handleScrollFade, { passive: true });
+  // Reveal profile image smoothly after intro
+  setTimeout(() => {
+    heroImg.classList.add('show', 'revealed');
+  }, 2600);
 });

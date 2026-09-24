@@ -55,6 +55,8 @@ body.no-scroll {
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* =========================================================
@@ -675,8 +677,8 @@ section {
 /* Cyberpunk HUD Skills Grid */
 .skills-hud-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
 }
 
 /* HUD Panel Containers */
@@ -687,7 +689,7 @@ section {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(16px);
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     clip-path: polygon(0 15px,
             15px 0,
             100% 0,
@@ -723,9 +725,9 @@ section {
 }
 
 .skill-panel:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     border-color: var(--neon-cyan);
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.15);
 }
 
 .skill-panel:hover::before,
@@ -740,94 +742,135 @@ section {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
     border-bottom: 1px solid rgba(0, 240, 255, 0.2);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
     position: relative;
 }
 
 .panel-icon {
-    font-size: 1.5rem;
-    filter: drop-shadow(0 0 5px var(--neon-cyan));
+    font-size: 1.4rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .panel-title {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     color: #fff;
     letter-spacing: 2px;
     text-transform: uppercase;
+    flex: 1;
 }
 
-/* Internal body holding the skill rings */
+.panel-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--neon-cyan);
+    letter-spacing: 1.5px;
+    opacity: 0.85;
+}
+
+/* Internal body holding the skill badge cards */
 .panel-body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.2rem;
 }
 
-.skill-card {
+/* Individual Skill Badge Card */
+.skill-badge-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: rgba(4, 12, 36, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid var(--accent-color, var(--neon-cyan));
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    backdrop-filter: blur(8px);
+}
+
+.skill-badge-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--accent-color, var(--neon-cyan)), transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.skill-badge-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: var(--accent-color, var(--neon-cyan));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-color, var(--neon-cyan));
+    background: rgba(10, 25, 60, 0.8);
+}
+
+.skill-badge-card:hover::before {
+    opacity: 0.12;
+}
+
+.skill-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--accent-color, var(--neon-cyan));
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.35s ease;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.skill-badge-card:hover .skill-icon-wrap {
+    transform: scale(1.1) rotate(4deg);
+    color: #fff;
+    background: var(--accent-color, var(--neon-cyan));
+    box-shadow: 0 0 15px var(--accent-color, var(--neon-cyan));
+}
+
+.skill-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.skill-card:hover {
-    background: rgba(0, 240, 255, 0.05);
-    border-color: rgba(0, 240, 255, 0.3);
-}
-
-.skill-card .ring-svg {
-    width: 75px;
-    height: 75px;
-    transform: rotate(-90deg);
-}
-
-.skill-card .ring-bg {
-    fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
-    stroke-width: 5;
-}
-
-.skill-card .ring-fill {
-    fill: none;
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-dasharray: 263.89;
-    stroke-dashoffset: 263.89;
-    transition: stroke-dashoffset 1.8s cubic-bezier(0.25, 1, 0.5, 1);
-    filter: drop-shadow(0 0 8px currentColor);
-}
-
-.skill-card .ring-pct {
-    position: absolute;
-    top: 36px;
-    left: 50%;
-    transform: translateX(-50%);
+.skill-badge-card .skill-name {
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #fff;
     letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    color: #fff;
+    text-align: left;
+    margin: 0;
+    text-transform: uppercase;
 }
 
-.skill-name {
+.skill-badge-card .skill-tag {
     font-family: var(--font-body);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: var(--neon-cyan);
-    text-align: center;
-    margin-top: 8px;
-    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: rgba(226, 232, 240, 0.6);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top: 2px;
 }
 
 /* =========================================================
